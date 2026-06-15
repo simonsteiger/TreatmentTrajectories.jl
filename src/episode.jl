@@ -11,7 +11,7 @@ started_in(t::Treatment, window::AbstractInterval) = start(t) in window
 
 `true` if `t` is *running* at any point during `window` (its interval overlaps).
 """
-active_in(t::Treatment,  window::AbstractInterval) = overlaps(interval(t), window)
+active_in(t::Treatment, window::AbstractInterval) = overlaps(interval(t), window)
 
 # cut a window from a trajectory using a membership predicate (f-first, like filter)
 """

@@ -38,13 +38,13 @@ Treatment(drug::T, interval::AbstractInterval) where {T<:AbstractDrug} =
 
 The drug carried by a [`Treatment`](@ref).
 """
-drug(t::Treatment)       = t.drug
+drug(t::Treatment) = t.drug
 """
     interval(x)
 
 The [`AbstractInterval`](@ref) spanned by a [`Treatment`](@ref) or window.
 """
-interval(t::Treatment)   = t.interval
-start(t::Treatment)      = start(t.interval)
-stop(t::Treatment)       = stop(t.interval)
+interval(t::Treatment) = t.interval
+start(t::Treatment) = start(t.interval)
+stop(t::Treatment) = stop(t.interval)
 is_ongoing(t::Treatment) = is_ongoing(t.interval)

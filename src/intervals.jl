@@ -70,7 +70,7 @@ The stop date of a [`StoppedInterval`](@ref) (or a stopped treatment/window).
 Throws `ArgumentError` on an [`OngoingInterval`](@ref) — guard with
 [`is_stopped`](@ref).
 """
-stop(i::StoppedInterval)   = i.stop
+stop(i::StoppedInterval) = i.stop
 
 """
     is_ongoing(x) -> Bool
@@ -98,8 +98,10 @@ duration(i::StoppedInterval) = i.stop - i.start
 # An ongoing interval has no stop date and no finite duration. Rather than
 # return `missing` (which would reintroduce the missing-branching the interval
 # type split exists to remove), these error: guard with `is_stopped` first.
-stop(::OngoingInterval)     = throw(ArgumentError("ongoing interval has no stop date; guard with is_stopped"))
-duration(::OngoingInterval) = throw(ArgumentError("ongoing interval has no duration; guard with is_stopped"))
+stop(::OngoingInterval) =
+    throw(ArgumentError("ongoing interval has no stop date; guard with is_stopped"))
+duration(::OngoingInterval) =
+    throw(ArgumentError("ongoing interval has no duration; guard with is_stopped"))
 
 # date membership (the upper bound is open for an ongoing interval)
 Base.in(x::Date, i::OngoingInterval) = x >= i.start

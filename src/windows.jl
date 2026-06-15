@@ -31,7 +31,7 @@ default reads a `treatments` field.
 treatments(w::AbstractTreatmentWindow) = w.treatments
 # default reads an `interval` field; any concrete window without one (e.g.
 # TreatmentTrajectory) MUST override this, as TreatmentTrajectory does below.
-interval(w::AbstractTreatmentWindow)   = w.interval
+interval(w::AbstractTreatmentWindow) = w.interval
 
 # ---- generic queries (any drug) ----
 # materialized (not a lazy generator) so the result is safe to iterate or
@@ -43,7 +43,7 @@ The vector of drugs in a window, in treatment order. Materialized (safe to
 iterate or `length` more than once).
 """
 drugs(w::AbstractTreatmentWindow) = [t.drug for t in treatments(w)]
-Base.length(w::AbstractTreatmentWindow)  = length(treatments(w))
+Base.length(w::AbstractTreatmentWindow) = length(treatments(w))
 Base.isempty(w::AbstractTreatmentWindow) = isempty(treatments(w))
 
 # ---- RA-branch queries (only meaningful for antirheumatic drugs) ----
@@ -99,16 +99,19 @@ struct TreatmentTrajectory{T} <: AbstractTreatmentWindow{T}
     id::Int
     diagnosis::Date
     treatments::Vector{Treatment{T}}
-    function TreatmentTrajectory(id::Int, diagnosis::Date,
-                                 treatments::Vector{Treatment{T}}) where {T}
-        return new{T}(id, diagnosis, sort(treatments; by=start))
+    function TreatmentTrajectory(
+        id::Int,
+        diagnosis::Date,
+        treatments::Vector{Treatment{T}},
+    ) where {T}
+        return new{T}(id, diagnosis, sort(treatments; by = start))
     end
 end
 
 # trajectory span: envelope of treatments, or a zero-width window at diagnosis if empty
 interval(traj::TreatmentTrajectory) =
     isempty(traj.treatments) ? StoppedInterval(traj.diagnosis, traj.diagnosis) :
-                               _envelope(traj.treatments)
+    _envelope(traj.treatments)
 
 """
     TreatmentEpisode(treatments::Vector{Treatment{T}}, interval::AbstractInterval)

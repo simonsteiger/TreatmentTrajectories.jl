@@ -35,9 +35,9 @@ makedocs(;
     modules = [TreatmentTrajectories],
     authors = "Simon Steiger",
     format = DocumenterVitepress.MarkdownVitepress(
-        repo      = "https://github.com/simonsteiger/TreatmentTrajectories.jl",
+        repo = "https://github.com/simonsteiger/TreatmentTrajectories.jl",
         devbranch = "main",
-        devurl    = "dev",
+        devurl = "dev",
     ),
     pages = [
         "Home" => "index.md",
@@ -53,7 +53,7 @@ makedocs(;
 )
 
 DocumenterVitepress.deploydocs(;
-    repo         = "github.com/simonsteiger/TreatmentTrajectories.jl.git",
-    devbranch    = "main",
+    repo = "github.com/simonsteiger/TreatmentTrajectories.jl.git",
+    devbranch = "main",
     push_preview = true,
 )

@@ -34,9 +34,9 @@ function lines(traj::TreatmentTrajectory{T}; gap::Day = Day(30)) where {T}
     ts = treatments(traj)                      # already sorted by start
     isempty(ts) && return TreatmentLine{T}[]
 
-    result  = TreatmentLine{T}[]
+    result = TreatmentLine{T}[]
     current = [ts[1]]
-    anchor  = start(ts[1])
+    anchor = start(ts[1])
 
     for t in @view ts[2:end]
         if start(t) - anchor <= gap
@@ -44,7 +44,7 @@ function lines(traj::TreatmentTrajectory{T}; gap::Day = Day(30)) where {T}
         else
             push!(result, _line(current))
             current = [t]
-            anchor  = start(t)
+            anchor = start(t)
         end
     end
     push!(result, _line(current))
