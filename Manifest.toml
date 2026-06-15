@@ -2,7 +2,7 @@
 
 julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "1b3f678760a6623643c63529e957e67956208d4e"
+project_hash = "48371d9b8139179ab533188481cb1ba27f58c60a"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -10,7 +10,9 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 version = "1.11.0"
 
 [[deps.DrugInterface]]
-path = "/Users/simonsteiger/Documents/phd/02_outcomes/DrugInterface"
+git-tree-sha1 = "77cc4b5890946738358a89a2f611c64473e3f4b9"
+repo-rev = "main"
+repo-url = "https://github.com/simonsteiger/DrugInterface.jl"
 uuid = "ecbac44d-373e-48a5-bcbb-08f349367545"
 version = "0.1.0"
 

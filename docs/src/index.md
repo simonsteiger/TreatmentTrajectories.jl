@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "TreatmentTrajectories.jl"
-  text: "Model treatment trajectories over time"
+  text: "Tools for working with treatment trajectories"
   tagline: Intervals, treatments, and windowed queries for longitudinal drug data
   actions:
     - theme: brand
@@ -15,7 +15,7 @@ hero:
       link: /api
     - theme: alt
       text: View on GitHub
-      link: https://github.com/simonsteiger/02_outcomes
+      link: https://github.com/simonsteiger/TreatmentTrajectories.jl
 ---
 ```
 
@@ -30,11 +30,11 @@ or "is a b/tsDMARD present?".
 
 ## Installation
 
-This package lives inside the `02_outcomes` monorepo and is developed locally:
+This package is not yet registered. Add it via URL:
 
 ```julia
 using Pkg
-Pkg.develop(path = "path/to/02_outcomes/TreatmentTrajectories")
+Pkg.add(url = "https://github.com/simonsteiger/TreatmentTrajectories.jl")
 ```
 
 ## Quick example
