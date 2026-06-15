@@ -34,7 +34,6 @@ DocMeta.setdocmeta!(
 makedocs(;
     modules = [TreatmentTrajectories],
     authors = "Simon Steiger",
-    repo = "https://github.com/simonsteiger/02_outcomes",
     format = DocumenterVitepress.MarkdownVitepress(
         repo = "github.com/simonsteiger/TreatmentTrajectories.jl",
         devbranch = "main",
