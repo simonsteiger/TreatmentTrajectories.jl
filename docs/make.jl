@@ -56,7 +56,7 @@ makedocs(;
 )
 
 DocumenterVitepress.deploydocs(;
-    repo         = "github.com/simonsteiger/02_outcomes.git",
+    repo         = "github.com/simonsteiger/TreatmentTrajectories.jl",
     devbranch    = "main",
     push_preview = true,
 )
