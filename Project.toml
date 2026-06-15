@@ -1,0 +1,17 @@
+name = "TreatmentTrajectories"
+uuid = "692400ee-4f07-4849-b443-1c0d23e91053"
+authors = ["Simon Steiger"]
+version = "0.1.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+DrugInterface = "ecbac44d-373e-48a5-bcbb-08f349367545"
+
+[compat]
+julia = "1.11"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

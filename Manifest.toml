@@ -1,0 +1,30 @@
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.12.6"
+manifest_format = "2.0"
+project_hash = "1b3f678760a6623643c63529e957e67956208d4e"
+
+[[deps.Dates]]
+deps = ["Printf"]
+uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+version = "1.11.0"
+
+[[deps.DrugInterface]]
+path = "/Users/simonsteiger/Documents/phd/02_outcomes/DrugInterface"
+uuid = "ecbac44d-373e-48a5-bcbb-08f349367545"
+version = "0.1.0"
+
+[[deps.Printf]]
+deps = ["Unicode"]
+uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+version = "1.11.0"
+
+[[deps.TreatmentTrajectories]]
+deps = ["Dates", "DrugInterface"]
+path = "."
+uuid = "692400ee-4f07-4849-b443-1c0d23e91053"
+version = "0.1.0"
+
+[[deps.Unicode]]
+uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+version = "1.11.0"
