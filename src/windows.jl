@@ -19,7 +19,7 @@ default errors.
 `drugs`, `length`, `isempty` for any `T`; `has_btsdmard` and
 `count_modes_of_action` for `T<:AbstractAntiRheumaticDrug`.
 """
-abstract type AbstractTreatmentWindow{T<:AbstractDrug} end
+abstract type AbstractTreatmentWindow{T <: AbstractDrug} end
 
 # ---- required interface (default: field access) ----
 """
@@ -67,7 +67,7 @@ count_modes_of_action(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) =
 # ---- span helper: envelope of a treatment vector ----
 function _envelope(ts::AbstractVector{<:Treatment})
     s = minimum(start, ts)
-    any(is_ongoing, ts) ? OngoingInterval(s) : StoppedInterval(s, maximum(stop, ts))
+    return any(is_ongoing, ts) ? OngoingInterval(s) : StoppedInterval(s, maximum(stop, ts))
 end
 
 # ---- concrete window types ----
@@ -100,10 +100,10 @@ struct TreatmentTrajectory{T} <: AbstractTreatmentWindow{T}
     diagnosis::Date
     treatments::Vector{Treatment{T}}
     function TreatmentTrajectory(
-        id::Int,
-        diagnosis::Date,
-        treatments::Vector{Treatment{T}},
-    ) where {T}
+            id::Int,
+            diagnosis::Date,
+            treatments::Vector{Treatment{T}},
+        ) where {T}
         return new{T}(id, diagnosis, sort(treatments; by = start))
     end
 end

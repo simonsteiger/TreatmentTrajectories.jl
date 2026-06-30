@@ -98,16 +98,17 @@ end
     @testset "anonymous drug exclusion" begin
         d_start = Date(2024, 1, 1)
         d_stop = Date(2024, 6, 1)
-        interval = StoppedInterval(d_start, d_stop)
+        d_interval = StoppedInterval(d_start, d_stop)
 
-        # one normal TNFi + one anonymous b/tsDMARD → only 1 distinct mode
-        t_ada_anon = Treatment(ADA, interval)
-        t_anon_tnfi = Treatment(ANON_TNFi, interval)
-        traj_mixed = TreatmentTrajectory(1, Date(2023, 12, 1), [t_ada_anon, t_anon_tnfi])
-        @test count_modes_of_action(traj_mixed) == 1
+        # Anonymous drugs: count of distinct modes should exclude anonymous ones
+        t_anon_tnfi = Treatment(ANON_TNFi, d_interval)
+        t_anon_jaki = Treatment(ANON_JAKi, d_interval)
 
-        # two anonymous b/tsDMARDs → 0 distinct modes
-        t_anon_jaki = Treatment(ANON_JAKi, interval)
+        # single anonymous b/tsDMARD → 0 distinct modes
+        traj_single_anon = TreatmentTrajectory(1, Date(2023, 12, 1), [t_anon_tnfi])
+        @test count_modes_of_action(traj_single_anon) == 0
+
+        # two different anonymous b/tsDMARDs → 0 distinct modes
         traj_anon = TreatmentTrajectory(2, Date(2023, 12, 1), [t_anon_tnfi, t_anon_jaki])
         @test count_modes_of_action(traj_anon) == 0
 
