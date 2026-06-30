@@ -96,24 +96,21 @@ end
     end
 
     @testset "anonymous drug exclusion" begin
-        d_start = Date(2024, 1, 1)
-        d_stop = Date(2024, 6, 1)
-        d_interval = StoppedInterval(d_start, d_stop)
+        d_interval = StoppedInterval(Date(2024, 1, 1), Date(2024, 6, 1))
 
-        # Anonymous drugs: count of distinct modes should exclude anonymous ones
-        t_anon_tnfi = Treatment(ANON_TNFi, d_interval)
-        t_anon_jaki = Treatment(ANON_JAKi, d_interval)
+        # one drug with known mode (TNFi) + one with unknown mode → only 1 distinct mode counted
+        t_known_tnfi = Treatment(AnonymousStubDrug(:TNFi, true, false), d_interval)
+        t_unknown_tnfi = Treatment(AnonymousStubDrug(:unknown, true, false), d_interval)
+        traj_mixed = TreatmentTrajectory(1, Date(2024, 1, 1), [t_known_tnfi, t_unknown_tnfi])
+        @test count_modes_of_action(traj_mixed) == 1
 
-        # single anonymous b/tsDMARD → 0 distinct modes
-        traj_single_anon = TreatmentTrajectory(1, Date(2023, 12, 1), [t_anon_tnfi])
-        @test count_modes_of_action(traj_single_anon) == 0
-
-        # two different anonymous b/tsDMARDs → 0 distinct modes
-        traj_anon = TreatmentTrajectory(2, Date(2023, 12, 1), [t_anon_tnfi, t_anon_jaki])
+        # two drugs with unknown modes → 0 distinct modes
+        t_unknown_jaki = Treatment(AnonymousStubDrug(:unknown, false, true), d_interval)
+        traj_anon = TreatmentTrajectory(2, Date(2024, 1, 1), [t_unknown_tnfi, t_unknown_jaki])
         @test count_modes_of_action(traj_anon) == 0
 
-        # has_btsdmard still true for trajectory containing only anonymous b/tsDMARD
-        traj_only_anon = TreatmentTrajectory(3, Date(2023, 12, 1), [t_anon_tnfi])
+        # has_btsdmard still true for trajectory with unknown-mode b/tsDMARD
+        traj_only_anon = TreatmentTrajectory(3, Date(2024, 1, 1), [t_unknown_tnfi])
         @test has_btsdmard(traj_only_anon)
     end
 end
