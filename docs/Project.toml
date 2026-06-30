@@ -7,3 +7,7 @@ TreatmentTrajectories = "692400ee-4f07-4849-b443-1c0d23e91053"
 
 [sources]
 DrugInterface = {rev = "main", url = "https://github.com/simonsteiger/DrugInterface.jl"}
+
+[compat]
+Documenter = "1.17.0"
+DocumenterVitepress = "0.3.4"
