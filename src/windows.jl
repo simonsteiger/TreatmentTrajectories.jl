@@ -59,7 +59,8 @@ has_btsdmard(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) =
 """
     count_modes_of_action(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) -> Int
 
-Number of distinct b/tsDMARD modes of action in the window. csDMARDs are ignored.
+Number of distinct b/tsDMARD modes of action in the window. csDMARDs and anonymous
+b/tsDMARDs (those for which `is_anonymous` returns `true`) are excluded.
 """
 count_modes_of_action(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) =
     length(unique(mode_of_action(d) for d in drugs(w) if is_btsdmard(d) && !is_anonymous(d)))
