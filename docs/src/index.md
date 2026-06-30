@@ -4,8 +4,7 @@ layout: home
 
 hero:
   name: "TreatmentTrajectories.jl"
-  text: "Tools for working with treatment trajectories"
-  tagline: Intervals, treatments, and windowed queries for longitudinal drug data
+  tagline: Tools for working with treatment trajectories
   actions:
     - theme: brand
       text: Get started
