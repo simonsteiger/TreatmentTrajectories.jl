@@ -1,8 +1,6 @@
 using DrugInterface
 
-abstract type AbstractStubDrug <: AbstractAntiRheumaticDrug end
-
-struct StubDrug <: AbstractStubDrug
+struct StubDrug <: AbstractAntiRheumaticDrug
     name::String
     moa::Symbol
     csdmard::Bool
@@ -25,7 +23,7 @@ const ETN = StubDrug("Etanercept", :TNFi, false, true, false, false)
 const TOF = StubDrug("Tofacitinib", :JAKi, false, false, true, false)
 const RTX = StubDrug("Rituximab", :CD20i, false, true, false, false)
 
-struct AnonymousStubDrug <: AbstractStubDrug
+struct AnonymousStubDrug <: AbstractAntiRheumaticDrug
     moa::Symbol
     bdmard::Bool
     tsdmard::Bool
