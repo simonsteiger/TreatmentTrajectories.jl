@@ -22,3 +22,21 @@ const ADA = StubDrug("Adalimumab", :TNFi, false, true, false, false)
 const ETN = StubDrug("Etanercept", :TNFi, false, true, false, false)
 const TOF = StubDrug("Tofacitinib", :JAKi, false, false, true, false)
 const RTX = StubDrug("Rituximab", :CD20i, false, true, false, false)
+
+struct AnonymousStubDrug <: AbstractAntiRheumaticDrug
+    moa::Symbol
+    bdmard::Bool
+    tsdmard::Bool
+end
+
+DrugInterface.substance(d::AnonymousStubDrug) = missing
+DrugInterface.mode_of_action(d::AnonymousStubDrug) = d.moa
+DrugInterface.is_csdmard(::AnonymousStubDrug) = false
+DrugInterface.is_bdmard(d::AnonymousStubDrug) = d.bdmard
+DrugInterface.is_tsdmard(d::AnonymousStubDrug) = d.tsdmard
+DrugInterface.is_cortisone(::AnonymousStubDrug) = false
+DrugInterface.is_anonymous(::AnonymousStubDrug) = true
+
+# AnonymousStubDrug fixtures
+const ANON_TNFi = AnonymousStubDrug(:unknown, true, false)
+const ANON_JAKi = AnonymousStubDrug(:unknown, false, true)

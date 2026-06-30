@@ -94,6 +94,34 @@ end
         @test has_btsdmard(traj)                                     # ADA + TOF
         @test count_modes_of_action(traj) == 2                      # TNFi, JAKi
     end
+
+    @testset "anonymous drug exclusion" begin
+        d_interval = StoppedInterval(Date(2024, 1, 1), Date(2024, 6, 1))
+
+        # one real TNFi (ADA, is_anonymous=false) + one anonymous b/tsDMARD → only 1 distinct mode counted
+        traj_mixed = TreatmentTrajectory(
+            1, Date(2024, 1, 1),
+            Treatment{AbstractAntiRheumaticDrug}[
+                Treatment{AbstractAntiRheumaticDrug}(ADA, d_interval, missing),
+                Treatment{AbstractAntiRheumaticDrug}(ANON_TNFi, d_interval, missing),
+            ]
+        )
+        @test count_modes_of_action(traj_mixed) == 1
+
+        # two anonymous b/tsDMARDs → 0 distinct modes
+        traj_anon = TreatmentTrajectory(
+            2, Date(2024, 1, 1),
+            [Treatment(ANON_TNFi, d_interval), Treatment(ANON_JAKi, d_interval)]
+        )
+        @test count_modes_of_action(traj_anon) == 0
+
+        # has_btsdmard still true when window contains only anonymous b/tsDMARD
+        traj_only_anon = TreatmentTrajectory(
+            3, Date(2024, 1, 1),
+            [Treatment(ANON_TNFi, d_interval)]
+        )
+        @test has_btsdmard(traj_only_anon)
+    end
 end
 
 @testset "episode" begin
