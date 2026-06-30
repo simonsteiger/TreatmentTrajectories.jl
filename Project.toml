@@ -1,6 +1,6 @@
 name = "TreatmentTrajectories"
 uuid = "692400ee-4f07-4849-b443-1c0d23e91053"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Simon Steiger"]
 
 [deps]
