@@ -62,7 +62,7 @@ has_btsdmard(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) =
 Number of distinct b/tsDMARD modes of action in the window. csDMARDs are ignored.
 """
 count_modes_of_action(w::AbstractTreatmentWindow{<:AbstractAntiRheumaticDrug}) =
-    length(unique(mode_of_action(d) for d in drugs(w) if is_btsdmard(d)))
+    length(unique(mode_of_action(d) for d in drugs(w) if is_btsdmard(d) && !is_anonymous(d)))
 
 # ---- span helper: envelope of a treatment vector ----
 function _envelope(ts::AbstractVector{<:Treatment})
